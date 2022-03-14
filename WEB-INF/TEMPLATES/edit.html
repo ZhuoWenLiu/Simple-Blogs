@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>博客系统 | 写博客</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <link rel="stylesheet" href="/editor.md/css/editormd.min.css">
+</head>
+<body>
+    <div class="nav">
+        <img src="img/logo2.jpg" alt="logo 图">
+        <span class="title" th:text="${user.nickname} + '的博客'">刘卓文的bolg</span>
+        <span class="spacer"></span>
+        <a href="/">主页</a>
+        <a href="/edit.html">写博客</a>
+        <a href="/logout">注销</a>
+    </div>
+
+    <div class="blog-edit-container">
+        <form action="/save-article" method="post">
+            <div class="title">
+                <input type="text" placeholder="请填写文章标题" id="title" name="title">
+                <button id="submit">发布文章</button>
+            </div>
+            <div id="editor">
+                <textarea name="content" style="display: none;"></textarea>
+            </div>
+        </form>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/editor.md/lib/marked.min.js"></script>
+    <script src="/editor.md/lib/prettify.min.js"></script>
+    <script src="/editor.md/editormd.js"></script>
+    <script>
+        editormd('editor', {
+            width: '100%',
+            height: 'calc(100% - 50px)',
+            markdown: '# 请使用 markdown 格式写文章正文',
+            path: '/editor.md/lib/',
+            saveHTMLToTextarea: true
+        });
+    </script>
+</body>
+</html>

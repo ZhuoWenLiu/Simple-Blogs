@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>博客系统 | 列表</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="nav">
+        <img src="/img/logo2.jpg" alt="logo 图">
+        <span class="title" th:text="${user.nickname} + '的博客'">刘卓文的博客</span>
+        <span class="spacer"></span>
+        <a href="/">主页</a>
+        <a href="/edit.html">写博客</a>
+        <a href="/login.html">注销</a>
+    </div>
+
+    <div class="container">
+        <div class="container-left">
+            <div class="card">
+                <img src="img/doge.jpg" alt="作者头像" class="avatar" th:src="${user.avatar}">
+                <h3 th:text="${user.nickname}">刘卓文</h3>
+                <a href="https://gitee.com/liuzhuowen" target="_blank" th:href="${user.git}">我的 git</a>
+                <div class="counter">
+                    <span>文章</span>
+                    <span>分类</span>
+                </div>
+                <div class="counter">
+                    <span th:text="${articleCount}">10</span>
+                    <span th:text="${typeCount}">2</span>
+                </div>
+            </div>
+        </div>
+        <div class="container-right">
+            <!-- 文章列表 -->
+            <div class="blog" th:each="article : ${articleList}">
+                <div class="title" th:text="${article.title}">Java不简单呢</div>
+                <div class="date" th:text="${article.publishedAt}">2021-12-22</div>
+                <div class="desc" th:text="${article.desc}">好好学习哈</div>
+                <a class="detail" href="article.html" th:href="'/article.html?aid=' + ${article.aid}">查看正文 &gt;&gt;</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
